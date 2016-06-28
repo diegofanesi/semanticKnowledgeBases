@@ -1,0 +1,2 @@
+# BPMN ontology for Semantic Business Process Representation 
+The domain ontologies contained in this project have been realized as proposals for Semantic Business Process Management and Semantic Business Process Representation. Every one of them is characterized by different structures due to the different features available in each language. A document showing the structure and comparing them in terms of computability and complexity has been presented as Master Thesis and Published as paper in  the IEEE conference www.es2015.org.
