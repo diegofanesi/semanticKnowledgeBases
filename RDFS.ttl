@@ -1,0 +1,724 @@
+# baseURI: http://example.org/unnamed
+
+@prefix BP: <http://example.org/unnamed#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/unnamed>
+  rdf:type owl:Ontology ;
+  owl:versionInfo "Created with TopBraid Composer"^^xsd:string ;
+.
+BP:Admission_Process_diagram
+  rdf:type BP:Business_process_diagram ;
+  BP:Business_process_diagram_has_pool BP:FHNW ;
+  BP:Business_process_diagram_has_pool BP:Pool_Applicant ;
+.
+BP:Admission_process
+  rdf:type BP:Business_Process ;
+  rdf:type rdfs:Class ;
+  BP:Business_process_has_start_event BP:Application_arrived ;
+.
+BP:Admission_process_JSmith
+  rdf:type BP:Admission_process ;
+.
+BP:Admission_process_MHopkins
+  rdf:type BP:Admission_process ;
+.
+BP:Admission_process_PMiller
+  rdf:type BP:Admission_process ;
+.
+BP:Application
+  rdf:type BP:Data_Object ;
+  rdf:type rdfs:Class ;
+  BP:Data_Object_has_Field BP:Data_Object_Field_Bachelor ;
+  BP:Data_Object_has_Field BP:Data_Object_Field_Grade ;
+.
+BP:Application_JSmith
+  rdf:type BP:Application ;
+  BP:Application_has_Applicant BP:Jane_Smith ;
+  BP:Application_has_field_value BP:Data_Object_Field_Bachelor_JSmith ;
+  BP:Application_has_field_value BP:Data_Object_Field_Grade_PMiller ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T10:03:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_MHopkins
+  rdf:type BP:Application ;
+  BP:Application_has_Applicant BP:Mary_Hopkins ;
+  BP:Application_has_field_value BP:Data_Object_Field_Bachelor_MHopkins ;
+  BP:Application_has_field_value BP:Data_Object_Field_Grade_MHopkins ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T09:15:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_PMiller
+  rdf:type BP:Application ;
+  BP:Application_has_Applicant BP:Peter_Miller ;
+  BP:Application_has_field_value BP:Data_Object_Field_Bachelor_PMiller ;
+  BP:Application_has_field_value BP:Data_Object_Field_Grade_PMiller ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T08:05:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_arrived
+  rdf:type BP:Start_Event ;
+  rdf:type rdfs:Class ;
+.
+BP:Application_arrived_JSmith
+  rdf:type BP:Application_arrived ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T10:03:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_arrived_MHopkins
+  rdf:type BP:Application_arrived ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T09:15:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_arrived_PMiller
+  rdf:type BP:Application_arrived ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T08:05:11+02:00"^^xsd:dateTime ;
+.
+BP:Application_arrived_condition
+  rdf:type BP:Condition ;
+.
+BP:Application_has_Applicant
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Application ;
+  rdfs:range BP:Person ;
+.
+BP:Application_has_field_value
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Application ;
+  rdfs:range BP:Data_Object_Field_Bachelor ;
+  rdfs:range BP:Data_Object_Field_Grade ;
+.
+BP:Association
+  rdf:type rdfs:Class ;
+.
+BP:Association_1
+  rdf:type BP:Association ;
+  BP:Association_has_Data_object BP:Application ;
+  BP:Association_has_task BP:Check_eligibility ;
+.
+BP:Association_2
+  rdf:type BP:Association ;
+  BP:Association_has_Data_object BP:Application ;
+  BP:Association_has_task BP:Make_decision ;
+.
+BP:Association_3
+  rdf:type BP:Association ;
+  BP:Association_has_Data_object BP:letter_template ;
+  BP:Association_has_task BP:Reject_application ;
+.
+BP:Association_has_Data_object
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Association ;
+  rdfs:range BP:Data_Object ;
+.
+BP:Association_has_task
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Association ;
+  rdfs:range BP:Task ;
+.
+BP:Bachelor_outgoing_gate1
+  rdf:type BP:Gate ;
+  BP:Gate_has_Condition BP:Condition_Bachelor_G1 ;
+.
+BP:Business_Process
+  rdf:type rdfs:Class ;
+.
+BP:Business_process_diagram
+  rdf:type rdfs:Class ;
+.
+BP:Business_process_diagram_has_pool
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Business_process_diagram ;
+  rdfs:range BP:Pool ;
+.
+BP:Business_process_has_start_event
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Business_Process ;
+.
+BP:Check_eligibility
+  rdf:type BP:Task ;
+  rdf:type rdfs:Class ;
+  BP:Element_belongs_to_Lane BP:Study_Assistant_lane ;
+  BP:Task_Execution_performed_by BP:Neyyer_Sheikh ;
+.
+BP:Check_eligibility_JSmith
+  rdf:type BP:Check_eligibility ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Task_Execution_has_end_datetime "2013-10-04T11:00:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-04T10:15:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Neyyer_Sheikh ;
+.
+BP:Check_eligibility_MHopkins
+  rdf:type BP:Check_eligibility ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Task_Execution_has_end_datetime "2013-10-03T10:15:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-03T10:00:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Neyyer_Sheikh ;
+.
+BP:Check_eligibility_PMiller
+  rdf:type BP:Check_eligibility ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Task_Execution_has_end_datetime "2013-10-02T08:45:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-02T08:20:11+02:00"^^xsd:dateTime ;
+.
+BP:Condition
+  rdf:type rdfs:Class ;
+.
+BP:Condition_Bachelor_G1
+  rdf:type BP:Condition ;
+  BP:Condition_has_expression BP:Expression_Bachelor_G1 ;
+.
+BP:Condition_Bachelor_G2
+  rdf:type BP:Condition ;
+  BP:Condition_has_expression BP:Expression_Bachelor_Expression_G2 ;
+.
+BP:Condition_Grade_G1
+  rdf:type BP:Condition ;
+  BP:Condition_has_expression BP:Expression_Grade_G1 ;
+.
+BP:Condition_Grade_G2
+  rdf:type BP:Condition ;
+  BP:Condition_has_expression BP:Expression_Grade_G2 ;
+.
+BP:Condition_has_expression
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Condition ;
+  rdfs:range BP:Expression ;
+.
+BP:Data_Object
+  rdf:type rdfs:Class ;
+.
+BP:Data_Object_Field
+  rdf:type rdfs:Class ;
+.
+BP:Data_Object_Field_Bachelor
+  rdf:type BP:Data_Object_Field ;
+  rdf:type rdfs:Class ;
+.
+BP:Data_Object_Field_Bachelor_JSmith
+  rdf:type BP:Data_Object_Field_Bachelor ;
+  BP:Data_Object_Field_Instance_has_Value "CS"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Bachelor_MHopkins
+  rdf:type BP:Data_Object_Field_Bachelor ;
+  BP:Data_Object_Field_Instance_has_Value "BA"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Bachelor_PMiller
+  rdf:type BP:Data_Object_Field_Bachelor ;
+  BP:Data_Object_Field_Instance_has_Value "BA"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Grade
+  rdf:type BP:Data_Object_Field ;
+  rdf:type rdfs:Class ;
+.
+BP:Data_Object_Field_Grade_JSmith
+  rdf:type BP:Data_Object_Field_Grade ;
+  BP:Data_Object_Field_Instance_has_Value "A"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Grade_MHopkins
+  rdf:type BP:Data_Object_Field_Grade ;
+  BP:Data_Object_Field_Instance_has_Value "A"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Grade_PMiller
+  rdf:type BP:Data_Object_Field_Grade ;
+  BP:Data_Object_Field_Instance_has_Value "B"^^xsd:anySimpleType ;
+.
+BP:Data_Object_Field_Instance_has_Value
+  rdf:type rdf:Property ;
+  rdfs:range xsd:anySimpleType ;
+.
+BP:Data_Object_has_Field
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Data_Object ;
+  rdfs:range BP:Data_Object_Field ;
+.
+BP:Dean_lane
+  rdf:type BP:Lane ;
+  BP:Lane_has_role BP:Role_Dean ;
+.
+BP:Element_belongs_to_Lane
+  rdf:type rdf:Property ;
+  rdfs:range BP:Lane ;
+.
+BP:End_Event1
+  rdf:type BP:End_event ;
+  rdf:type rdfs:Class ;
+.
+BP:End_Event_1
+  rdf:type BP:End_Event1 ;
+.
+BP:End_Event_2
+  rdf:type BP:End_Event1 ;
+.
+BP:End_Event_3
+  rdf:type BP:End_Event1 ;
+.
+BP:End_event
+  rdf:type rdfs:Class ;
+.
+BP:Enroll_student
+  rdf:type BP:Task ;
+  rdf:type rdfs:Class ;
+  BP:Element_belongs_to_Lane BP:Study_Assistant_lane ;
+.
+BP:Enroll_student_JSmith
+  rdf:type BP:Enroll_student ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Task_Execution_has_end_datetime "2013-10-04T12:25:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-04T12:10:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Sarah_Gerber ;
+.
+BP:Enroll_student_MHopkins
+  rdf:type BP:Enroll_student ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Task_Execution_has_end_datetime "2013-10-03T12:15:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-03T11:15:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Sarah_Gerber ;
+.
+BP:Entity
+  rdf:type rdfs:Class ;
+.
+BP:Event_has_Condition
+  rdf:type rdf:Property ;
+  rdfs:range BP:Condition ;
+.
+BP:Execution_Element_has_Process_Instance
+  rdf:type rdf:Property ;
+  rdfs:range BP:Admission_process ;
+.
+BP:Execution_Element_has_creation_datetime
+  rdf:type rdf:Property ;
+  rdfs:range xsd:dateTime ;
+.
+BP:Expression
+  rdf:type rdfs:Class ;
+.
+BP:Expression_Application_arrived_expression
+  rdf:type BP:Expression ;
+  rdf:type rdfs:Class ;
+  BP:Expression_has_body """ASK{
+?BPApplicationInstance rdf:type BP:Application
+NOTEXISTS(?BPApplicationInstance BP:Element_has_Process_Instance ?BPInstance
+?BPInstance rdf:type BP:Admission_process)
+}"""^^xsd:string ;
+  BP:Expression_has_language "SPIN"^^xsd:string ;
+.
+BP:Expression_Application_arrived_expression_JSmith
+  rdf:type BP:Expression_Application_arrived_expression ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T10:03:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Application_arrived_expression_MHopkins
+  rdf:type BP:Expression_Application_arrived_expression ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T09:15:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Application_arrived_expression_PMiller
+  rdf:type BP:Expression_Application_arrived_expression ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T08:05:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_Expression_G2
+  rdf:type BP:Expression ;
+  rdf:type rdfs:Class ;
+  BP:Expression_has_body """ASK{
+?BachelorInstance BP:Element_has_Process_Instance ?BPInstance
+?BPInstance rdf:type BP:Admission_process
+?BachelorInstance rdf:type BP:Data_Object_Field_Bachelor
+?this BP:Element_has_Process_Instance ?BPInstance
+FILTER(NOTEXISTS(?BachelorInstance BP:Data_Object_Field_Instance_has_Value \"CS\"^^xsd:string) and NOTEXISTS(?BachelorInstance BP:Data_Object_Field_Instance_has_Value \"BA\"^^xsd:string))
+}"""^^xsd:string ;
+  BP:Expression_has_language "SPIN"^^xsd:string ;
+.
+BP:Expression_Bachelor_Expression_G2_JSmith
+  rdf:type BP:Expression_Bachelor_Expression_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T11:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_Expression_G2_MHopkins
+  rdf:type BP:Expression_Bachelor_Expression_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T10:16:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_Expression_G2_PMiller
+  rdf:type BP:Expression_Bachelor_Expression_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T08:46:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_G1
+  rdf:type BP:Expression ;
+  rdf:type rdfs:Class ;
+  BP:Expression_has_body """ASK{
+?BachelorInstance BP:Element_has_Process_Instance ?BPInstance
+?BPInstance rdf:type BP:Admission_process
+?BachelorInstance rdf:type BP:Data_Object_Field_Bachelor
+?this BP:Element_has_Process_Instance ?BPInstance
+FILTER(?BachelorInstance BP:Data_Object_Field_Instance_has_Value \"CS\"^^xsd:string or ?BachelorInstance BP:Data_Object_Field_Instance_has_Value \"BA\"^^xsd:string)
+}"""^^xsd:string ;
+  BP:Expression_has_language "SPIN"^^xsd:string ;
+.
+BP:Expression_Bachelor_G1_JSmith
+  rdf:type BP:Expression_Bachelor_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T11:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_G1_MHopkins
+  rdf:type BP:Expression_Bachelor_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T10:16:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Bachelor_G1_PMiller
+  rdf:type BP:Expression_Bachelor_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T08:46:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Grade_G1
+  rdf:type BP:Expression ;
+  rdf:type rdfs:Class ;
+  BP:Expression_has_body """ASK {
+?GradeInstance BP:Element_has_Process_Instance ?BPInstance
+?BPInstance rdf:type BP:Admission_process
+?GradeInstance rdf:type BP:Data_Object_Field_Grade
+?this BP:Element_has_Process_Instance ?BPInstance
+FILTER(NOTEXISTS(?GradeInstance BP:Data_Object_Field_Instance_has_Value \"A\"))
+}"""^^xsd:string ;
+  BP:Expression_has_language "SPIN"^^xsd:string ;
+.
+BP:Expression_Grade_G1_JSmith
+  rdf:type BP:Expression_Grade_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T12:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_Grade_G1_MHopkins
+  rdf:type BP:Expression_Grade_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T11:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_Grade_G1_PMiller
+  rdf:type BP:Expression_Grade_G1 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T10:11:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Grade_G2
+  rdf:type BP:Expression ;
+  rdf:type rdfs:Class ;
+  BP:Expression_has_body """ASK {
+?GradeInstance BP:Element_has_Process_Instance ?BPInstance
+?BPInstance rdf:type BP:Admission_process
+?GradeInstance rdf:type BP:Data_Object_Field_Grade
+?this BP:Element_has_Process_Instance ?BPInstance
+FILTER(?GradeInstance BP:Data_Object_Field_Instance_has_Value \"A\")
+}"""^^xsd:string ;
+  BP:Expression_has_language "SPIN"^^xsd:string ;
+.
+BP:Expression_Grade_G2_JSmith
+  rdf:type BP:Expression_Grade_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Execution_Element_has_creation_datetime "2013-10-04T12:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Grade_G2_MHopkins
+  rdf:type BP:Expression_Grade_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Execution_Element_has_creation_datetime "2013-10-03T11:01:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "true"^^xsd:boolean ;
+.
+BP:Expression_Grade_G2_PMiller
+  rdf:type BP:Expression_Grade_G2 ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Execution_Element_has_creation_datetime "2013-10-02T10:11:11+02:00"^^xsd:dateTime ;
+  BP:Expression_execution_has_value "false"^^xsd:boolean ;
+.
+BP:Expression_execution_has_value
+  rdf:type rdf:Property ;
+  rdfs:range xsd:boolean ;
+.
+BP:Expression_has_body
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Expression ;
+  rdfs:range xsd:string ;
+.
+BP:Expression_has_language
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Expression ;
+  rdfs:range xsd:string ;
+.
+BP:FHNW
+  rdf:type BP:Pool ;
+  BP:Pool_has_Entity BP:FHNW_University ;
+  BP:Pool_has_Lane BP:Dean_lane ;
+  BP:Pool_has_Lane BP:Study_Assistant_lane ;
+  BP:Pool_has_business_process BP:Admission_process ;
+.
+BP:FHNW_University
+  rdf:type BP:Entity ;
+.
+BP:Gate
+  rdf:type rdfs:Class ;
+.
+BP:Gate_has_Condition
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Gate ;
+  rdfs:range BP:Condition ;
+.
+BP:Gateway
+  rdf:type rdfs:Class ;
+.
+BP:Gateway_has_gate
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Gateway ;
+  rdfs:range BP:Gate ;
+.
+BP:Jane_Smith
+  rdf:type BP:Person ;
+  BP:Person_has_role BP:Role_Applicant ;
+.
+BP:Knut_Hinkelmann
+  rdf:type BP:Person ;
+  BP:Person_has_role BP:Role_Dean ;
+.
+BP:Lane
+  rdf:type rdfs:Class ;
+.
+BP:Lane_Applicant
+  rdf:type BP:Lane ;
+  BP:Lane_has_role BP:Role_Applicant ;
+.
+BP:Lane_has_role
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Lane ;
+  rdfs:range BP:Role ;
+.
+BP:Make_decision
+  rdf:type BP:Task ;
+  rdf:type rdfs:Class ;
+  BP:Element_belongs_to_Lane BP:Dean_lane ;
+.
+BP:Make_decision_JSmith
+  rdf:type BP:Make_decision ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_JSmith ;
+  BP:Task_Execution_has_end_datetime "2013-10-04T12:00:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-04T11:20:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Knut_Hinkelmann ;
+.
+BP:Make_decision_MHopkins
+  rdf:type BP:Make_decision ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_MHopkins ;
+  BP:Task_Execution_has_end_datetime "2013-10-03T11:00:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-03T10:20:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Knut_Hinkelmann ;
+  BP:Task_Execution_performed_by BP:Mary_Hopkins ;
+.
+BP:Make_decision_PMiller
+  rdf:type BP:Make_decision ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Task_Execution_has_end_datetime "2013-10-02T10:10:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-02T09:30:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Knut_Hinkelmann ;
+.
+BP:Mary_Hopkins
+  rdf:type BP:Person ;
+  BP:Person_has_role BP:Role_Applicant ;
+.
+BP:Neyyer_Sheikh
+  rdf:type BP:Person ;
+  BP:Person_has_role BP:Role_Study_Assistant ;
+.
+BP:Parameter_has_domain
+  rdf:type rdf:Property ;
+  rdfs:domain rdfs:Datatype ;
+  rdfs:range rdfs:Resource ;
+.
+BP:Person
+  rdf:type rdfs:Class ;
+.
+BP:Person_has_role
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Person ;
+  rdfs:range BP:Role ;
+.
+BP:Peter_Miller
+  rdf:type BP:Person ;
+.
+BP:Pool
+  rdf:type rdfs:Class ;
+.
+BP:Pool_Applicant
+  rdf:type BP:Pool ;
+  BP:Pool_has_Lane BP:Lane_Applicant ;
+.
+BP:Pool_has_Entity
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Pool ;
+  rdfs:range BP:Entity ;
+.
+BP:Pool_has_Lane
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Pool ;
+  rdfs:range BP:Lane ;
+.
+BP:Pool_has_business_process
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Pool ;
+  rdfs:range BP:Business_Process ;
+.
+BP:Reject_application
+  rdf:type BP:Task ;
+  rdf:type rdfs:Class ;
+  BP:Element_belongs_to_Lane BP:Study_Assistant_lane ;
+.
+BP:Reject_application_PMiller
+  rdf:type BP:Reject_application ;
+  BP:Execution_Element_has_Process_Instance BP:Admission_process_PMiller ;
+  BP:Task_Execution_has_end_datetime "2013-10-02T11:00:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_has_start_datetime "2013-10-02T10:30:11+02:00"^^xsd:dateTime ;
+  BP:Task_Execution_performed_by BP:Neyyer_Sheikh ;
+.
+BP:Role
+  rdf:type rdfs:Class ;
+.
+BP:Role_Applicant
+  rdf:type BP:Role ;
+.
+BP:Role_Dean
+  rdf:type BP:Role ;
+.
+BP:Role_Study_Assistant
+  rdf:type BP:Role ;
+.
+BP:Sarah_Gerber
+  rdf:type BP:Person ;
+  BP:Person_has_role BP:Role_Study_Assistant ;
+.
+BP:Sequence_flow
+  rdf:type rdfs:Class ;
+.
+BP:Sequence_flow_1
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:Application_arrived ;
+  BP:Sequence_flow_has_destination BP:Check_eligibility ;
+.
+BP:Sequence_flow_2
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:Check_eligibility ;
+  BP:Sequence_flow_has_destination BP:bachelor_incoming_gate ;
+.
+BP:Sequence_flow_3
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:Bachelor_outgoing_gate1 ;
+  BP:Sequence_flow_has_destination BP:Make_decision ;
+.
+BP:Sequence_flow_4
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:Make_decision ;
+  BP:Sequence_flow_has_destination BP:grade_incoming_gate ;
+.
+BP:Sequence_flow_5
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:bachelor_outgoing_gate2 ;
+  BP:Sequence_flow_has_destination BP:Reject_application ;
+.
+BP:Sequence_flow_6
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:grade_outgoing_gate1 ;
+  BP:Sequence_flow_has_destination BP:Reject_application ;
+.
+BP:Sequence_flow_7
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:grade_outgoing_gate2 ;
+  BP:Sequence_flow_has_destination BP:Enroll_student ;
+.
+BP:Sequence_flow_8
+  rdf:type BP:Sequence_flow ;
+  BP:Sequence_flow_has_Source BP:Enroll_student ;
+.
+BP:Sequence_flow_has_Source
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Sequence_flow ;
+  rdfs:range BP:Gate ;
+  rdfs:range BP:Task ;
+.
+BP:Sequence_flow_has_destination
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Sequence_flow ;
+  rdfs:range BP:Gate ;
+  rdfs:range BP:Task ;
+.
+BP:Start_Event
+  rdf:type rdfs:Class ;
+.
+BP:Study_Assistant_lane
+  rdf:type BP:Lane ;
+  BP:Lane_has_role BP:Role_Study_Assistant ;
+.
+BP:Task
+  rdf:type rdfs:Class ;
+.
+BP:Task_Execution_has_end_datetime
+  rdf:type rdf:Property ;
+  rdfs:range xsd:dateTime ;
+.
+BP:Task_Execution_has_start_datetime
+  rdf:type rdf:Property ;
+  rdfs:range xsd:dateTime ;
+.
+BP:Task_Execution_performed_by
+  rdf:type rdf:Property ;
+  rdfs:range BP:Person ;
+.
+BP:Task_has_End_Condition
+  rdf:type rdf:Property ;
+  rdfs:domain BP:Task ;
+  rdfs:range BP:Condition ;
+.
+BP:bachelor
+  rdf:type BP:Gateway ;
+  BP:Element_belongs_to_Lane BP:Study_Assistant_lane ;
+  BP:Gateway_has_gate BP:Bachelor_outgoing_gate1 ;
+  BP:Gateway_has_gate BP:bachelor_incoming_gate ;
+  BP:Gateway_has_gate BP:bachelor_outgoing_gate2 ;
+.
+BP:bachelor_incoming_gate
+  rdf:type BP:Gate ;
+.
+BP:bachelor_outgoing_gate2
+  rdf:type BP:Gate ;
+  BP:Gate_has_Condition BP:Condition_Bachelor_G2 ;
+.
+BP:grade
+  rdf:type BP:Gateway ;
+  BP:Element_belongs_to_Lane BP:Dean_lane ;
+  BP:Gateway_has_gate BP:grade_incoming_gate ;
+  BP:Gateway_has_gate BP:grade_outgoing_gate1 ;
+  BP:Gateway_has_gate BP:grade_outgoing_gate2 ;
+.
+BP:grade_incoming_gate
+  rdf:type BP:Gate ;
+.
+BP:grade_outgoing_gate1
+  rdf:type BP:Gate ;
+  BP:Gate_has_Condition BP:Condition_Grade_G1 ;
+.
+BP:grade_outgoing_gate2
+  rdf:type BP:Gate ;
+  BP:Gate_has_Condition BP:Condition_Grade_G2 ;
+.
+BP:letter_template
+  rdf:type BP:Data_Object ;
+.
